@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 // Importaciones internas
 import authRoutes from "./routes/auth_routes.js";
 import createInitialAdmin from "./models/config_adm.js";
+import { Lote, Compra, Comprador, Especie, Tipo, Usuario } from "./models/index.js";
 
 dotenv.config({ path: '.env' });
 
