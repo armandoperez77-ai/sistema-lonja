@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth_routes.js";
 import createInitialAdmin from "./models/config_adm.js";
 import { Lote, Compra, Comprador, Especie, Tipo, Usuario } from "./models/index.js";
+import ventasRoutes from "./routes/ventas_routes.js";
 
 dotenv.config({ path: '.env' });
 
@@ -23,6 +24,7 @@ app.set('views', './views');
 
 // Conectar las rutas
 app.use("/", authRoutes);
+app.use("/ventas", ventasRoutes);
 
 // Configuración y arranque del servidor
 const port = 3000;
