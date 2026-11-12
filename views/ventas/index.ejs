@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#142d4e">
+  <title>Panel de gestión | Lonja de Veracruz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="app-page">
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand-lockup brand-lockup-light sidebar-brand" href="/ventas" aria-label="Lonja de Veracruz, inicio">
+        <span class="brand-symbol" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M7 24c5.3-7.8 12.5-11.7 21.6-11.7 5.6 0 10.2 2.1 13.7 6.3-2.6 1-4.8 2.8-6.4 5.4 1.6 2.6 3.8 4.4 6.4 5.4-3.5 4.2-8.1 6.3-13.7 6.3C19.5 35.7 12.3 31.8 7 24Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="28.5" cy="21" r="1.8" fill="currentColor"/><path d="M7 24 2.8 19.5M7 24l-4.2 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </span>
+        <span><strong>LONJA</strong><small>VERACRUZ</small></span>
+      </a>
+
+      <div class="sidebar-section-label">MENÚ PRINCIPAL</div>
+      <nav class="sidebar-nav" aria-label="Navegación principal">
+        <button class="nav-item is-active" type="button" data-view-target="dashboard">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.7"/><rect x="13" y="3" width="8" height="5" rx="1.7"/><rect x="13" y="10" width="8" height="11" rx="1.7"/><rect x="3" y="13" width="8" height="8" rx="1.7"/></svg>
+          <span>Panel principal</span>
+        </button>
+        <button class="nav-item" type="button" data-view-target="purchases">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h2l2 11h10l2-8H7"/><circle cx="10" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>
+          <span>Compras</span>
+          <span class="nav-count" id="sidebar-purchase-count">—</span>
+        </button>
+        <button class="nav-item" type="button" data-view-target="reports">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3.5h9l5 5V20a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V3.5Z"/><path d="M14 3.5V9h5M8.5 13h7M8.5 16.5h7"/></svg>
+          <span>Reportes diarios</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-section-label sidebar-section-spaced">CATÁLOGOS</div>
+      <nav class="sidebar-nav" aria-label="Catálogos">
+        <button class="nav-item" type="button" data-view-target="buyers">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.3"/><path d="M3 20v-1.5a5.8 5.8 0 0 1 11.6 0V20M16 5.2a3.2 3.2 0 0 1 0 6.2M17.5 14.5a4.8 4.8 0 0 1 3.5 4.6V20"/></svg>
+          <span>Compradores</span>
+        </button>
+        <button class="nav-item" type="button" data-view-target="lots">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 4.8v8.4L12 21l-9-4.8V7.8L12 3Z"/><path d="m3.5 7.8 8.5 4.7 8.5-4.7M12 12.5V21M7.5 5.4l9 4.9"/></svg>
+          <span>Lotes y especies</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-help-card">
+          <span class="help-card-icon">i</span>
+          <div><strong>Panel administrativo</strong><p>Consulta la información registrada en el sistema.</p></div>
+        </div>
+        <a class="sidebar-logout" href="/cerrarsesion">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H5.5A1.5 1.5 0 0 0 4 5.5v13A1.5 1.5 0 0 0 5.5 20H10M15 16l4-4-4-4M19 12H9"/></svg>
+          <span>Cerrar sesión</span>
+        </a>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button mobile-menu-button" type="button" aria-label="Abrir menú" data-sidebar-toggle>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="breadcrumb"><span>Lonja de Veracruz</span><span class="breadcrumb-separator">/</span><strong id="breadcrumb-current">Panel principal</strong></div>
+        </div>
+        <div class="topbar-right">
+          <div class="topbar-date"><span class="topbar-date-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3.5v3M16.5 3.5v3M3.5 9.5h17"/></svg></span><span data-today-label></span></div>
+          <div class="topbar-divider"></div>
+          <div class="user-menu">
+            <span class="avatar"><%= (usuario && usuario.nombre ? usuario.nombre.trim().charAt(0) : 'A').toUpperCase() %></span>
+            <span class="user-menu-name"><strong><%= usuario ? usuario.nombre : 'Administrador' %></strong><small>Administrador</small></span>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+        <section class="view-section is-visible" id="view-dashboard" data-view="dashboard">
+          <div class="page-heading page-heading-dashboard">
+            <div><span class="eyebrow">RESUMEN GENERAL</span><h1>Panel principal</h1><p>Consulta el movimiento de compras y el estado general de la operación.</p></div>
+            <button class="btn btn-primary" type="button" data-open-purchase>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              <span>Registrar compra</span>
+            </button>
+          </div>
+
+          <div class="welcome-strip">
+            <div class="welcome-copy"><span class="welcome-kicker">OPERACIÓN DIARIA</span><h2>Bienvenido, <%= usuario ? usuario.nombre.split(' ')[0] : 'Administrador' %></h2><p>Tu información de gestión está lista para consultar.</p></div>
+            <div class="welcome-decoration" aria-hidden="true"><span class="welcome-circle circle-a"></span><span class="welcome-circle circle-b"></span><span class="welcome-lines"></span></div>
+            <div class="welcome-date"><span>HOY</span><strong data-welcome-date></strong></div>
+          </div>
+
+          <div class="section-title-row"><div><h2>Indicadores de operación</h2><p>Datos calculados a partir de los registros disponibles.</p></div><span class="subtle-status"><i></i> Datos del sistema</span></div>
+          <div class="metrics-grid">
+            <article class="metric-card"><div class="metric-top"><span class="metric-icon metric-icon-green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h2l2 11h10l2-8H7"/><circle cx="10" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg></span><span class="metric-label">Compras de hoy</span></div><strong class="metric-value" id="metric-today-count">—</strong><span class="metric-footnote">Operaciones registradas en la fecha actual</span></article>
+            <article class="metric-card"><div class="metric-top"><span class="metric-icon metric-icon-blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M17 7.5c0-1.7-2.2-3-5-3s-5 1.3-5 3 2.2 3 5 3 5 1.3 5 3-2.2 3-5 3-5-1.3-5-3"/></svg></span><span class="metric-label">Importe de hoy</span></div><strong class="metric-value metric-currency" id="metric-today-total">—</strong><span class="metric-footnote">Suma de las compras registradas hoy</span></article>
+            <article class="metric-card"><div class="metric-top"><span class="metric-icon metric-icon-sand"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3 20v-1.4a6 6 0 0 1 12 0V20M16 5.2a3.2 3.2 0 0 1 0 6.2M17 14.5a4.8 4.8 0 0 1 4 4.7V20"/></svg></span><span class="metric-label">Compradores</span></div><strong class="metric-value" id="metric-buyers">—</strong><span class="metric-footnote">Compradores registrados en catálogo</span></article>
+            <article class="metric-card"><div class="metric-top"><span class="metric-icon metric-icon-lilac"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 4.8v8.4L12 21l-9-4.8V7.8L12 3Z"/><path d="m3.5 7.8 8.5 4.7 8.5-4.7M12 12.5V21"/></svg></span><span class="metric-label">Lotes registrados</span></div><strong class="metric-value" id="metric-lots">—</strong><span class="metric-footnote">Lotes disponibles en catálogo</span></article>
+          </div>
+
+          <div class="content-card recent-card">
+            <div class="card-heading"><div><h2>Compras recientes</h2><p>Últimas operaciones registradas.</p></div><button class="text-link" type="button" data-view-target="purchases">Ver todas <span>→</span></button></div>
+            <div class="table-wrap"><table class="data-table"><thead><tr><th>FOLIO</th><th>FECHA</th><th>COMPRADOR</th><th>LOTE</th><th>PRECIO / KG</th><th>IMPORTE TOTAL</th></tr></thead><tbody id="dashboard-recent-body"><tr><td colspan="6" class="table-empty">Cargando información…</td></tr></tbody></table></div>
+          </div>
+        </section>
+
+        <section class="view-section" id="view-purchases" data-view="purchases">
+          <div class="page-heading"><div><span class="eyebrow">OPERACIONES</span><h1>Compras</h1><p>Consulta y registra las compras realizadas por los compradores.</p></div><button class="btn btn-primary" type="button" data-open-purchase><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Nueva compra</span></button></div>
+          <div class="content-card">
+            <div class="card-heading card-heading-wrap"><div><h2>Registro de compras</h2><p>Listado de operaciones almacenadas.</p></div><div class="table-tools"><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="purchase-search" type="search" placeholder="Buscar compra…" aria-label="Buscar compra"></label><span class="results-count" id="purchase-results-count"></span></div></div>
+            <div class="table-wrap"><table class="data-table"><thead><tr><th>FOLIO</th><th>FECHA</th><th>COMPRADOR</th><th>LOTE</th><th>PRECIO / KG</th><th>IMPORTE TOTAL</th></tr></thead><tbody id="purchases-table-body"><tr><td colspan="6" class="table-empty">Cargando información…</td></tr></tbody></table></div>
+            <div class="table-footer"><span>Los registros se consultan directamente desde el sistema.</span><span id="purchase-footer-count"></span></div>
+          </div>
+        </section>
+
+        <section class="view-section" id="view-reports" data-view="reports">
+          <div class="page-heading"><div><span class="eyebrow">CONSULTA Y CONTROL</span><h1>Reportes diarios</h1><p>Revisa el detalle de compras registradas en una fecha determinada.</p></div></div>
+          <div class="content-card report-filter-card">
+            <div class="report-filter-copy"><span class="filter-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M7.5 3.5v3M16.5 3.5v3M3.5 9.5h17"/></svg></span><div><h2>Seleccionar fecha</h2><p>El reporte se construye con las compras ya registradas.</p></div></div>
+            <div class="report-date-control"><label for="report-date">Día del reporte</label><input id="report-date" type="date"><button class="btn btn-secondary" type="button" id="report-today">Hoy</button></div>
+          </div>
+          <div class="report-summary-grid">
+            <article class="report-summary-card"><span>Operaciones del día</span><strong id="report-count">0</strong><small>Compras registradas</small></article>
+            <article class="report-summary-card"><span>Importe acumulado</span><strong id="report-total">$0.00</strong><small>Suma de importes del día</small></article>
+            <article class="report-summary-card"><span>Compradores distintos</span><strong id="report-unique-buyers">0</strong><small>Con operaciones en la fecha</small></article>
+          </div>
+          <div class="content-card">
+            <div class="card-heading card-heading-wrap"><div><h2 id="report-heading">Detalle del día</h2><p>Desglose de las compras correspondientes a la fecha seleccionada.</p></div><div class="report-actions"><button class="btn btn-secondary btn-small" type="button" id="export-report"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Exportar CSV</button><button class="btn btn-secondary btn-small" type="button" id="print-report"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M7 14h10v7H7z"/></svg>Imprimir</button></div></div>
+            <div class="table-wrap"><table class="data-table"><thead><tr><th>FOLIO</th><th>FECHA</th><th>COMPRADOR</th><th>LOTE</th><th>PRECIO / KG</th><th>IMPORTE TOTAL</th></tr></thead><tbody id="report-table-body"><tr><td colspan="6" class="table-empty">Selecciona una fecha para consultar.</td></tr></tbody></table></div>
+          </div>
+        </section>
+
+        <section class="view-section" id="view-buyers" data-view="buyers">
+          <div class="page-heading"><div><span class="eyebrow">CATÁLOGOS</span><h1>Compradores</h1><p>Consulta los compradores registrados en la base de datos.</p></div><span class="read-only-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Consulta de solo lectura</span></div>
+          <div class="content-card"><div class="card-heading"><div><h2>Directorio de compradores</h2><p>Información disponible en el catálogo actual.</p></div><span class="results-count" id="buyers-count">—</span></div><div class="table-wrap"><table class="data-table"><thead><tr><th>CÓDIGO</th><th>NOMBRE</th></tr></thead><tbody id="buyers-table-body"><tr><td colspan="2" class="table-empty">Cargando compradores…</td></tr></tbody></table></div></div>
+        </section>
+
+        <section class="view-section" id="view-lots" data-view="lots">
+          <div class="page-heading"><div><span class="eyebrow">CATÁLOGOS</span><h1>Lotes y especies</h1><p>Consulta la información de los lotes, especies y tipos registrados.</p></div><span class="read-only-tag"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Consulta de solo lectura</span></div>
+          <div class="content-card"><div class="card-heading"><div><h2>Lotes registrados</h2><p>Existencias y datos generales de cada lote.</p></div><span class="results-count" id="lots-count">—</span></div><div class="table-wrap"><table class="data-table"><thead><tr><th>LOTE</th><th>KILOS</th><th>CAJAS</th><th>PRECIO DE SALIDA / KG</th><th>FECHA</th></tr></thead><tbody id="lots-table-body"><tr><td colspan="5" class="table-empty">Cargando lotes…</td></tr></tbody></table></div></div>
+          <div class="catalog-secondary-grid"><div class="content-card"><div class="card-heading"><div><h2>Especies</h2><p>Catálogo de especies.</p></div></div><div class="catalog-list" id="species-list"><p class="table-empty">Cargando especies…</p></div></div><div class="content-card"><div class="card-heading"><div><h2>Tipos</h2><p>Clasificaciones registradas.</p></div></div><div class="catalog-list" id="types-list"><p class="table-empty">Cargando tipos…</p></div></div></div>
+        </section>
+
+        <footer class="app-footer"><span>© <span data-current-year></span> Lonja de Veracruz</span><span>Sistema de gestión administrativa</span></footer>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="purchase-modal" aria-hidden="true">
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="purchase-modal-title">
+      <div class="modal-heading"><div><span class="eyebrow">NUEVA OPERACIÓN</span><h2 id="purchase-modal-title">Registrar compra</h2><p>Completa los datos para guardar la compra.</p></div><button class="icon-button modal-close" type="button" aria-label="Cerrar ventana" data-close-purchase><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <form action="/ventas/registrar" method="POST" id="purchase-form" class="purchase-form">
+        <div class="form-field"><label for="id_lte">Lote <span class="required-mark">*</span></label><select id="id_lte" name="id_lte" required><option value="">Cargando lotes…</option></select><small>Selecciona el lote relacionado con la compra.</small></div>
+        <div class="form-field"><label for="codigo_cpr">Comprador <span class="required-mark">*</span></label><select id="codigo_cpr" name="codigo_cpr" required><option value="">Cargando compradores…</option></select><small>Selecciona el comprador que realiza la operación.</small></div>
+        <div class="form-grid-two"><div class="form-field"><label for="precio_kilo_final">Precio final por kilo <span class="required-mark">*</span></label><div class="input-prefix"><span>$</span><input id="precio_kilo_final" name="precio_kilo_final" type="number" min="0.01" step="0.01" placeholder="0.00" required></div></div><div class="form-field"><label for="precio_total">Importe total <span class="required-mark">*</span></label><div class="input-prefix"><span>$</span><input id="precio_total" name="precio_total" type="number" min="0.01" step="0.01" placeholder="0.00" required></div></div></div>
+        <div class="form-note"><span class="form-note-icon">i</span><p>La fecha y hora se asignan automáticamente al registrar la compra, de acuerdo con el backend existente.</p></div>
+        <div class="modal-actions"><button class="btn btn-secondary" type="button" data-close-purchase>Cancelar</button><button class="btn btn-primary" type="submit" id="save-purchase-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h12l3 3v13H4V4h1ZM8 4v6h8V4M8 20v-7h8v7"/></svg>Guardar compra</button></div>
+      </form>
+    </section>
+  </div>
+
+  <script id="lonja-page-data" type="application/json"><%- JSON.stringify({ purchases: compras.map((compra) => ({ id_cmp: compra.id_cmp, id_lte: compra.id_lte, codigo_cpr: compra.codigo_cpr, precio_kilo_final: Number(compra.precio_kilo_final), precio_total: Number(compra.precio_total), fecha: compra.fecha, comprador: compra.Comprador ? [compra.Comprador.nombre, compra.Comprador.apellido_paterno, compra.Comprador.apellido_materno].filter(Boolean).join(' ') : `Comprador #${compra.codigo_cpr}`, lote_kilos: compra.Lote ? Number(compra.Lote.kilos) : null, lote_cajas: compra.Lote ? compra.Lote.numero_cajas : null })) }).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029') %></script>
+  <script src="/js/app.js" defer></script>
+</body>
+</html>

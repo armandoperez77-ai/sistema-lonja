@@ -12,7 +12,7 @@ const verVentas = async (req, res) => {
             order: [['fecha', 'DESC']]
         });
         
-        // Renderiza la vista que hará tu compañero
+        
         res.render("ventas/index.ejs", { 
             compras,
             usuario: req.usuario // Mandamos los datos del admin que inició sesión

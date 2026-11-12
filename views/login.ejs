@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#142d4e">
+  <title>Iniciar sesión | Lonja de Veracruz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <section class="login-brand-panel" aria-label="Lonja de Veracruz">
+      <div class="brand-lockup brand-lockup-light">
+        <span class="brand-symbol" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M7 24c5.3-7.8 12.5-11.7 21.6-11.7 5.6 0 10.2 2.1 13.7 6.3-2.6 1-4.8 2.8-6.4 5.4 1.6 2.6 3.8 4.4 6.4 5.4-3.5 4.2-8.1 6.3-13.7 6.3C19.5 35.7 12.3 31.8 7 24Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="28.5" cy="21" r="1.8" fill="currentColor"/><path d="M7 24 2.8 19.5M7 24l-4.2 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </span>
+        <span><strong>LONJA</strong><small>VERACRUZ</small></span>
+      </div>
+
+      <div class="login-brand-copy">
+        <span class="eyebrow eyebrow-light">PLATAFORMA DE GESTIÓN</span>
+        <h1>Una operación<br>más clara, cada día.</h1>
+        <p>Administra las compras, consulta los movimientos y mantén la información de tu operación en un solo lugar.</p>
+      </div>
+
+      <div class="login-art" aria-hidden="true">
+        <div class="art-orbit orbit-one"></div>
+        <div class="art-orbit orbit-two"></div>
+        <div class="art-wave wave-one"></div>
+        <div class="art-wave wave-two"></div>
+        <div class="art-fish">
+          <svg viewBox="0 0 340 190" fill="none"><path d="M45 95C81 42 145 22 219 43c25 7 47 22 62 45-15 23-37 38-62 45-74 21-138 1-174-38Z" fill="rgba(255,255,255,.11)" stroke="rgba(255,255,255,.54)" stroke-width="2"/><path d="m45 95-38-31v62l38-31Z" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.54)" stroke-width="2"/><circle cx="237" cy="79" r="5" fill="#dcebe5"/><path d="M135 44c-17 20-17 82 0 102" stroke="rgba(255,255,255,.25)" stroke-width="2"/></svg>
+        </div>
+        <span class="art-caption">LONJA DE VERACRUZ · SISTEMA ADMINISTRATIVO</span>
+      </div>
+      <div class="login-panel-footer"><span>Gestión confiable</span><span>·</span><span>Información organizada</span></div>
+    </section>
+
+    <section class="login-form-panel">
+      <div class="login-form-wrap">
+        <div class="mobile-brand brand-lockup">
+          <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M7 24c5.3-7.8 12.5-11.7 21.6-11.7 5.6 0 10.2 2.1 13.7 6.3-2.6 1-4.8 2.8-6.4 5.4 1.6 2.6 3.8 4.4 6.4 5.4-3.5 4.2-8.1 6.3-13.7 6.3C19.5 35.7 12.3 31.8 7 24Z" stroke="currentColor" stroke-width="2.2"/><circle cx="28.5" cy="21" r="1.8" fill="currentColor"/></svg></span>
+          <span><strong>LONJA</strong><small>VERACRUZ</small></span>
+        </div>
+        <span class="eyebrow">BIENVENIDO DE NUEVO</span>
+        <h2>Inicia sesión</h2>
+        <p class="form-intro">Ingresa tus credenciales para acceder al sistema.</p>
+
+        <% if (error) { %>
+          <div class="alert alert-danger" role="alert">
+            <span class="alert-icon">!</span>
+            <span><%= error %>. Verifica tu correo y contraseña.</span>
+          </div>
+        <% } %>
+
+        <form action="<%= action %>" method="<%= method %>" class="login-form" autocomplete="on">
+          <label for="email">Correo electrónico</label>
+          <div class="input-with-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="m4.5 7 7.5 5.5L19.5 7"/></svg>
+            <input id="email" name="email" type="email" placeholder="nombre@empresa.com" autocomplete="username" required autofocus>
+          </div>
+
+          <div class="label-row"><label for="password">Contraseña</label></div>
+          <div class="input-with-icon password-input-wrap">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></svg>
+            <input id="password" name="password" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password" required>
+            <button class="password-toggle" type="button" aria-label="Mostrar contraseña" data-password-toggle>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.8 12s3.2-6 9.2-6 9.2 6 9.2 6-3.2 6-9.2 6-9.2-6-9.2-6Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+            </button>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full login-submit">
+            <span>Entrar al sistema</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </form>
+
+        <div class="security-note"><span class="security-icon">✓</span><span>Acceso protegido para personal autorizado</span></div>
+        <p class="login-copyright">© <span data-current-year></span> Lonja de Veracruz. Todos los derechos reservados.</p>
+      </div>
+    </section>
+  </main>
+  <script src="/js/app.js" defer></script>
+</body>
+</html>
