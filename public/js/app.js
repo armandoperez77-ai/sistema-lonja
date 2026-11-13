@@ -338,3 +338,48 @@
     if ($('.app-page')) initAppPage();
   });
 })();
+
+// --- MEJORA DEL BACKEND: Especies, Precio Automático y Total ---
+document.addEventListener("DOMContentLoaded", () => {
+    let catalogos = null;
+
+    // 1. Descargamos la información de MariaDB a través de la ruta de tu compañero
+    fetch('/ui/catalogos')
+        .then(res => res.json())
+        .then(data => catalogos = data);
+
+    // 2. Interceptamos el clic en el menú de lotes para agregarle la Especie
+    document.body.addEventListener('click', (e) => {
+        if (e.target.name === 'id_lte' && catalogos && !e.target.dataset.nombresActualizados) {
+            Array.from(e.target.options).forEach(opcion => {
+                if (opcion.value) {
+                    const especie = catalogos.especies.find(esp => esp.id_lte == opcion.value);
+                    if (especie && !opcion.text.includes(especie.nombre)) {
+                        // Cambiamos "Lote #2" por "Lote #2 - Atún Aleta Amarilla"
+                        opcion.text = `${opcion.text} - ${especie.nombre}`;
+                    }
+                }
+            });
+            e.target.dataset.nombresActualizados = "true"; // Marcamos para no repetirlo
+        }
+    });
+
+    // 3. Autocompletamos el precio cuando selecciona un lote
+    document.body.addEventListener('change', (e) => {
+        if (e.target.name === 'id_lte' && catalogos) {
+            const inputPrecio = document.querySelector('input[name="precio_kilo_final"]');
+            const inputTotal = document.querySelector('input[name="precio_total"]');
+            const lote = catalogos.lotes.find(l => l.id_lte == e.target.value);
+            
+            if (lote && inputPrecio) {
+                // Ponemos el precio del kilo
+                inputPrecio.value = lote.precio_kilo_salida;
+                
+                // ¡EXTRA!: Te programé que calcule el importe total automáticamente (Kilos del lote x Precio)
+                if (inputTotal) {
+                    inputTotal.value = (lote.precio_kilo_salida * lote.kilos).toFixed(2);
+                }
+            }
+        }
+    });
+});

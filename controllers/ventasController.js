@@ -14,7 +14,10 @@ const verVentas = async (req, res) => {
             order: [['fecha', 'DESC']]
         });
         
-        const lotes = await Lote.findAll({ order: [['id_lte', 'DESC']] });
+        const lotes = await Lote.findAll({ 
+    include: [{ model: Especie }],
+    order: [['id_lte', 'DESC']] 
+});
         const compradores = await Comprador.findAll({ order: [['apellido_paterno', 'ASC']] });
         
         res.render("ventas/index.ejs", { 

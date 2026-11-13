@@ -157,9 +157,59 @@
     <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="purchase-modal-title">
       <div class="modal-heading"><div><span class="eyebrow">NUEVA OPERACIÓN</span><h2 id="purchase-modal-title">Registrar compra</h2><p>Completa los datos para guardar la compra.</p></div><button class="icon-button modal-close" type="button" aria-label="Cerrar ventana" data-close-purchase><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
       <form action="/ventas/registrar" method="POST" id="purchase-form" class="purchase-form">
-        <div class="form-field"><label for="id_lte">Lote <span class="required-mark">*</span></label><select id="id_lte" name="id_lte" required><option value="">Cargando lotes…</option></select><small>Selecciona el lote relacionado con la compra.</small></div>
-        <div class="form-field"><label for="codigo_cpr">Comprador <span class="required-mark">*</span></label><select id="codigo_cpr" name="codigo_cpr" required><option value="">Cargando compradores…</option></select><small>Selecciona el comprador que realiza la operación.</small></div>
-        <div class="form-grid-two"><div class="form-field"><label for="precio_kilo_final">Precio final por kilo <span class="required-mark">*</span></label><div class="input-prefix"><span>$</span><input id="precio_kilo_final" name="precio_kilo_final" type="number" min="0.01" step="0.01" placeholder="0.00" required></div></div><div class="form-field"><label for="precio_total">Importe total <span class="required-mark">*</span></label><div class="input-prefix"><span>$</span><input id="precio_total" name="precio_total" type="number" min="0.01" step="0.01" placeholder="0.00" required></div></div></div>
+        
+        <div class="form-field">
+          <label for="id_lte">Lote <span class="required-mark">*</span></label>
+          <select id="id_lte" name="id_lte" class="form-select" required>
+            <option value="" selected disabled>Selecciona un lote</option>
+            <% if (typeof lotes !== 'undefined' && lotes.length > 0) { %>
+              <% lotes.forEach(lote => { %>
+                <% const nombreEspecie = (lote.Especies && lote.Especies.length > 0) ? lote.Especies[0].nombre : 'Especie asignada'; %>
+                <option value="<%= lote.id_lte %>" data-precio="<%= lote.precio_kilo_salida %>" data-kilos="<%= lote.kilos %>">
+                  Lote #<%= lote.id_lte %> - <%= nombreEspecie %> (<%= lote.kilos %> kg)
+                </option>
+              <% }) %>
+            <% } else { %>
+              <option value="" disabled>No hay lotes disponibles</option>
+            <% } %>
+          </select>
+          <small>Selecciona el lote relacionado con la compra.</small>
+        </div>
+        
+        <div class="form-field">
+          <label for="codigo_cpr">Comprador <span class="required-mark">*</span></label>
+          <select id="codigo_cpr" name="codigo_cpr" class="form-select" required>
+            <option value="" selected disabled>Selecciona un comprador</option>
+            <% if (typeof compradores !== 'undefined' && compradores.length > 0) { %>
+              <% compradores.forEach(comprador => { %>
+                <option value="<%= comprador.codigo_cpr %>">
+                  <%= comprador.nombre %> <%= comprador.apellido_paterno %> <%= comprador.apellido_materno %>
+                </option>
+              <% }) %>
+            <% } else { %>
+              <option value="" disabled>No hay compradores disponibles</option>
+            <% } %>
+          </select>
+          <small>Selecciona el comprador que realiza la operación.</small>
+        </div>
+        
+        <div class="form-grid-two">
+          <div class="form-field">
+            <label for="precio_kilo_final">Precio final por kilo <span class="required-mark">*</span></label>
+            <div class="input-prefix">
+              <span>$</span>
+              <input id="precio_kilo_final" name="precio_kilo_final" type="number" min="0.01" step="0.01" placeholder="0.00" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="precio_total">Importe total <span class="required-mark">*</span></label>
+            <div class="input-prefix">
+              <span>$</span>
+              <input id="precio_total" name="precio_total" type="number" min="0.01" step="0.01" placeholder="0.00" required>
+            </div>
+          </div>
+        </div>
+        
         <div class="form-note"><span class="form-note-icon">i</span><p>La fecha y hora se asignan automáticamente al registrar la compra, de acuerdo con el backend existente.</p></div>
         <div class="modal-actions"><button class="btn btn-secondary" type="button" data-close-purchase>Cancelar</button><button class="btn btn-primary" type="submit" id="save-purchase-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h12l3 3v13H4V4h1ZM8 4v6h8V4M8 20v-7h8v7"/></svg>Guardar compra</button></div>
       </form>
@@ -168,5 +218,62 @@
 
   <script id="lonja-page-data" type="application/json"><%- JSON.stringify({ purchases: compras.map((compra) => ({ id_cmp: compra.id_cmp, id_lte: compra.id_lte, codigo_cpr: compra.codigo_cpr, precio_kilo_final: Number(compra.precio_kilo_final), precio_total: Number(compra.precio_total), fecha: compra.fecha, comprador: compra.Comprador ? [compra.Comprador.nombre, compra.Comprador.apellido_paterno, compra.Comprador.apellido_materno].filter(Boolean).join(' ') : `Comprador #${compra.codigo_cpr}`, lote_kilos: compra.Lote ? Number(compra.Lote.kilos) : null, lote_cajas: compra.Lote ? compra.Lote.numero_cajas : null })) }).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029') %></script>
   <script src="/js/app.js" defer></script>
+ <script>
+  document.addEventListener("DOMContentLoaded", () => {
+      let catalogosApi = null;
+      fetch('/ui/catalogos').then(res => res.json()).then(data => catalogosApi = data);
+  
+      const selectLote = document.querySelector('select[name="id_lte"]');
+      const inputPrecio = document.querySelector('input[name="precio_kilo_final"]');
+      const inputTotal = document.querySelector('input[name="precio_total"]');
+  
+      if (selectLote && inputPrecio && inputTotal) {
+          const vigia = new MutationObserver(() => {
+              if (catalogosApi && selectLote.options.length > 1) {
+                  Array.from(selectLote.options).forEach(opt => {
+                      if (opt.value && !opt.dataset.corregido) {
+                          const lote = catalogosApi.lotes.find(l => l.id_lte == opt.value);
+                          const especie = catalogosApi.especies.find(e => e.id_lte == opt.value);
+                          if (lote && especie) {
+                              opt.text = `Lote #${lote.id_lte} - ${especie.nombre} (${lote.kilos} kg)`;
+                              opt.setAttribute('data-kilos', lote.kilos);
+                              opt.setAttribute('data-costo', lote.precio_kilo_salida);
+                              opt.dataset.corregido = "true"; 
+                          }
+                      }
+                  });
+              }
+          });
+          vigia.observe(selectLote, { childList: true });
+  
+          selectLote.addEventListener('change', function() {
+              const opt = this.options[this.selectedIndex];
+              const kilos = opt.getAttribute('data-kilos');
+              const costoBase = opt.getAttribute('data-costo');
+              
+              if (kilos && costoBase) {
+                  // Usamos setTimeout para que esta fórmula se ejecute DESPUÉS de app.js
+                  setTimeout(() => {
+                      const precioVentaFinal = parseFloat(costoBase) * 1.50;
+                      const importeTotalCalculado = precioVentaFinal * parseFloat(kilos);
+                      
+                      inputPrecio.value = precioVentaFinal.toFixed(2);
+                      inputTotal.value = importeTotalCalculado.toFixed(2);
+                      
+                      inputPrecio.readOnly = true;
+                      inputTotal.readOnly = true;
+                      inputPrecio.style.backgroundColor = "#e9ecef";
+                      inputTotal.style.backgroundColor = "#e9ecef";
+                  }, 50); // 50 milisegundos de retraso
+              } else {
+                  setTimeout(() => {
+                      inputPrecio.value = ""; 
+                      inputTotal.value = "";
+                  }, 50);
+              }
+          });
+      }
+  });
+</script>
 </body>
 </html>
